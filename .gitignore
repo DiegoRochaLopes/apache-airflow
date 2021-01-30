@@ -1,0 +1,7 @@
+__pycache__
+.DS_Store.DS_Store
+.DS_Store
+pgdata/
+.idea/
+dags/.idea/
+logs/

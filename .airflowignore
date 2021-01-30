@@ -1,0 +1,15 @@
+dags/helpers/
+
+database/
+logs/
+pgdata/
+dags/.idea/
+
+.env
+.gitignore
+docker-compose.yml
+global
+.vscode/*
+.DS_Store.DS_Store
+.DS_Store
+.idea/
