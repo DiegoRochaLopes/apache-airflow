@@ -1,0 +1,44 @@
+version: '3.3'
+services:
+    postgres:
+        image: postgres:13-alpine
+        environment:
+            - POSTGRES_USER=airflow
+            - POSTGRES_PASSWORD=airflow
+            - POSTGRES_DB=airflow
+        volumes:
+            - ./database:/docker-entrypoint-initdb.d/
+        ports:
+            - "5432:5432"
+
+    webserver:
+        image: apache/airflow:2.0.0-python3.8
+        entrypoint: ./scripts/entrypoint_webserver.sh
+        restart: always
+        depends_on:
+            - postgres
+        env_file:
+            - .env
+        volumes:
+            - ./:/opt/airflow/dags
+            - ./logs:/opt/airflow/logs
+            - ./requirements.txt:/opt/airflow/scripts/requirements.txt
+            - ./scripts/entrypoint_webserver.sh:/opt/airflow/scripts/entrypoint_webserver.sh
+        ports:
+            - "8080:8080"
+
+    scheduler:
+        image: apache/airflow:2.0.0-python3.8
+        command: scheduler
+        entrypoint: ./scripts/entrypoint_scheduler.sh
+        restart: always
+        depends_on:
+            - postgres
+            - webserver
+        env_file:
+            - .env
+        volumes:
+            - ./:/opt/airflow/dags
+            - ./logs:/opt/airflow/logs
+            - ./requirements.txt:/opt/airflow/scripts/requirements.txt
+            - ./scripts/entrypoint_scheduler.sh:/opt/airflow/scripts/entrypoint_scheduler.sh

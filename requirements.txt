@@ -1,0 +1,5 @@
+# Google libraries
+# gspread
+# Others libraries
+# oauth2
+# oauth2client
