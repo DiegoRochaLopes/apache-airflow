@@ -7,7 +7,7 @@ Ao executar serão criados os bancos:
 
 Os dois bancos contem a tabela `tb1`.
 
-Contem uma dag com exemplo de `TaskGroup`, dump load e auto documentação.
+Contem uma dag `dag01` com exemplo de `TaskGroup`, dump load e auto documentação.
 
 
 ## Execução
